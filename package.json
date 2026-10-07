@@ -1,0 +1,20 @@
+{
+  "name": "nxtwave-ai-growth-engine",
+  "version": "2.0.0",
+  "description": "AI-powered growth and engagement platform for NxtWave workshop",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.27.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.18.0",
+    "nodemailer": "^7.0.6",
+    "openai": "^5.19.1"
+  }
+}

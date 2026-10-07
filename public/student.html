@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Growth Dashboard | NxtWave</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
+    body { background: #0b1020; color: #fff; line-height: 1.6; }
+    .container { width: 90%; max-width: 900px; margin: auto; }
+    nav { padding: 18px 0; border-bottom: 1px solid #252b40; }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 20px; font-weight: bold; }
+    .logo span { color: #7c5cff; }
+    .card { background: #12182b; border: 1px solid #252b40; border-radius: 14px; padding: 25px; margin-top: 30px; }
+    .ref-box { background: #0c1222; border: 1px dashed #7c5cff; padding: 25px; border-radius: 12px; text-align: center; margin: 20px 0; }
+    .ref-code { font-size: 32px; font-weight: bold; color: #9f8cff; margin: 10px 0; letter-spacing: 1px; }
+    button { padding: 10px 18px; border-radius: 8px; border: none; background: #7c5cff; color: #fff; cursor: pointer; font-weight: bold; }
+    .secondary { background: #202842; }
+    .ai-msg { background: #0c1222; padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 14px; min-height: 50px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">NxtWave <span>Student Hub</span></div>
+      <div>
+        <span id="welcomeName" style="margin-right: 15px; font-size: 14px;"></span>
+        <button class="secondary" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="card">
+      <h2>🎉 Your Growth Dashboard</h2>
+      <p style="color: #aeb8d0; font-size: 14px;">Share your personal referral code with your college friends to climb the leaderboard.</p>
+
+      <div class="ref-box">
+        <p style="font-size: 13px; color: #aeb8d0;">YOUR REFERRAL CODE</p>
+        <div id="studentReferralCode" class="ref-code">NW-XXXX</div>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button onclick="copyStudentReferral()">Copy Code</button>
+          <button class="secondary" onclick="shareWhatsApp()">Share on WhatsApp</button>
+        </div>
+      </div>
+
+      <h3>✨ AI Personalized Invitation</h3>
+      <p style="color: #aeb8d0; font-size: 13px;">Generate an invitation tailored to your branch and interest.</p>
+      <div id="aiMessage" class="ai-msg">Click below to generate your message.</div>
+      <div style="display: flex; gap: 10px;">
+        <button onclick="generateStudentAIMessage()">Generate with AI</button>
+        <button class="secondary" onclick="copyAIMsg()">Copy Message</button>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid #252b40; margin: 25px 0;">
+
+      <h3>📧 Workshop Updates</h3>
+      <p style="color: #aeb8d0; font-size: 13px; margin-bottom: 12px;">Trigger a reminder or session checklist to your registered email.</p>
+      <button onclick="sendStudentEmail('reminder')">Send Reminder</button>
+      <button class="secondary" onclick="sendStudentEmail('update')">Send Update</button>
+      <p id="emailStatus" style="margin-top: 10px; font-size: 13px; color: #65e0ae;"></p>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      enforceRole("student");
+      const user = getCurrentUser();
+      if (user) {
+        document.getElementById("welcomeName").innerText = `${user.name} (${user.college})`;
+        document.getElementById("studentReferralCode").innerText = user.referralCode;
+      }
+    });
+  </script>
+</body>
+</html>
